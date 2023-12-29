@@ -9,6 +9,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * RabbitMq Configuration.
+ *
+ * @author Ayah Refai
+ * @since 12/19/2023
+ */
 @Configuration
 public class RabbitMQConfig {
 
@@ -29,10 +35,52 @@ public class RabbitMQConfig {
     public static final String DEAD_LETTER_ROUTING_KEY = "dead_letter";
 
     /**
-     * header binding to q1 when argument `type` equal `message`
-     * header binding to q2 when argument `type` equal `email`
-     * header binding to q3 when argument `type` equal `notification`
-     * header binding to q4 when argument `type` equal `sms`
+     * direct binding to q1 when routing key is `log1`.
+     * direct binding to q2 when routing key is `log2`.
+     * direct binding to q3 when routing key is `log3`.
+     * direct binding to q4 when routing key is `log4`.
+     * direct binding to q5 when routing key is `log5`.
+     * where exchange is `ayah.direct.exchange`.
+     *
+     * @return Binding
+     */
+    private static List<Binding> directBinding() {
+        ArrayList<Binding> bindings = new ArrayList<>();
+        bindings.add(new Binding(QUEUE_1,
+                Binding.DestinationType.QUEUE,
+                DIRECT_EXCHANGE,
+                "log1",
+                null));
+        bindings.add(new Binding(QUEUE_2,
+                Binding.DestinationType.QUEUE,
+                DIRECT_EXCHANGE,
+                "log2",
+                null));
+        bindings.add(new Binding(QUEUE_3,
+                Binding.DestinationType.QUEUE,
+                DIRECT_EXCHANGE,
+                "log3",
+                null));
+        bindings.add(new Binding(QUEUE_4,
+                Binding.DestinationType.QUEUE,
+                DIRECT_EXCHANGE,
+                "log4",
+                null));
+        ////////////////////////////////////////////////////////////////////////////
+        bindings.add(new Binding(QUEUE_5,
+                Binding.DestinationType.QUEUE,
+                DIRECT_EXCHANGE,
+                "log5",
+                null));
+        return bindings;
+    }
+
+    /**
+     * header binding to q1 when argument `type` equal `message`.
+     * header binding to q2 when argument `type` equal `email`.
+     * header binding to q3 when argument `type` equal `notification`.
+     * header binding to q4 when argument `type` equal `sms`.
+     * where exchange is `ayah.headers.exchange`.
      *
      * @return Binding
      */
@@ -74,12 +122,12 @@ public class RabbitMQConfig {
         return bindings;
     }
 
-
     /**
-     * header binding to q1 when argument `type` equal `message` or `count equal 1
-     * header binding to q2 when argument `type` equal `message` and `count` equal 1
-     * header binding to q3 when argument `type` equal `message`
-     * header binding to q4 when argument `count` equal 1
+     * header binding to q1 when argument `type` equal `message` or `count equal `1`.
+     * header binding to q2 when argument `type` equal `message` and `count` equal `1`.
+     * header binding to q3 when argument `type` equal `message`.
+     * header binding to q4 when argument `count` equal `1`.
+     * where exchange is `ayah.headers.match.exchange`.
      *
      * @return Binding
      */
@@ -125,13 +173,12 @@ public class RabbitMQConfig {
         return bindings;
     }
 
-
     /**
-     * topic binding to q1 when routing key match ayah.log1.*
-     * topic binding to q2 when routing key match ayah.log2.*
-     * topic binding to q3 when routing key match ayah.*
-     * topic binding to q4 when routing key match *.log2.*
-     * where exchange is ayah.topic.exchange
+     * topic binding to q1 when routing key match `ayah.log1.*`.
+     * topic binding to q2 when routing key match `ayah.log2.*`.
+     * topic binding to q3 when routing key match `ayah.*`.
+     * topic binding to q4 when routing key match `*.log2.*`.
+     * where exchange is `ayah.topic.exchange`.
      *
      * @return Binding
      */
@@ -161,8 +208,8 @@ public class RabbitMQConfig {
     }
 
     /**
-     * fanout binding to q1,q2,q3, qnd q4
-     * where exchange is ayah.fanout.exchange
+     * fanout binding to q1,q2,q3, and q4.
+     * where exchange is `ayah.fanout.exchange`.
      *
      * @return Binding
      */
@@ -192,51 +239,8 @@ public class RabbitMQConfig {
     }
 
     /**
-     * direct binding to q1 when routing key is log1
-     * direct binding to q2 when routing key is log2
-     * direct binding to q3 when routing key is log3
-     * direct binding to q4 when routing key is log4
-     * direct binding to q5 when routing key is log5 and
-     * x-dead-letter-exchange is ayah.dead.letter.exchange and
-     * x-dead-letter-routing-key is dead_letter
-     * where exchange is ayah.direct.exchange
-     *
-     * @return Binding
-     */
-    private static List<Binding> directBinding() {
-        ArrayList<Binding> bindings = new ArrayList<>();
-        bindings.add(new Binding(QUEUE_1,
-                Binding.DestinationType.QUEUE,
-                DIRECT_EXCHANGE,
-                "log1",
-                null));
-        bindings.add(new Binding(QUEUE_2,
-                Binding.DestinationType.QUEUE,
-                DIRECT_EXCHANGE,
-                "log2",
-                null));
-        bindings.add(new Binding(QUEUE_3,
-                Binding.DestinationType.QUEUE,
-                DIRECT_EXCHANGE,
-                "log3",
-                null));
-        bindings.add(new Binding(QUEUE_4,
-                Binding.DestinationType.QUEUE,
-                DIRECT_EXCHANGE,
-                "log4",
-                null));
-        ////////////////////////////////////////////////////////////////////////////
-        bindings.add(new Binding(QUEUE_5,
-                Binding.DestinationType.QUEUE,
-                DIRECT_EXCHANGE,
-                "log5",
-                null));
-        return bindings;
-    }
-
-    /**
-     * direct binding to dead.letter.queue when routing key is dead_letter
-     * where exchange is ayah.dead.letter.exchange
+     * direct binding to dead.letter.queue when routing key is `dead_letter`.
+     * where exchange is `ayah.dead.letter.exchange`.
      *
      * @return Binding
      */
@@ -253,24 +257,25 @@ public class RabbitMQConfig {
     @Bean
     public Declarables topicExchangeBindings() {
         ArrayList<Declarable> declarable = new ArrayList<>();
+        //********************************************* Add Queue ***************************************//
         declarable.add(new Queue(QUEUE_1, true));
         declarable.add(new Queue(QUEUE_2, true));
         declarable.add(new Queue(QUEUE_3, true));
         declarable.add(new Queue(QUEUE_4, true));
-        //////////////////////////////////////////////////////////////////////////////////////////////////////
+        //********************************************* Add Exchange ***************************************//
         declarable.add(new DirectExchange(DIRECT_EXCHANGE, true, false));
         declarable.add(new TopicExchange(TOPIC_EXCHANGE, true, false));
         declarable.add(new FanoutExchange(FANOUT_EXCHANGE, true, false));
         declarable.add(new HeadersExchange(HEADERS_EXCHANGE, true, false));
         declarable.add(new HeadersExchange(HEADERS_EXCHANGE_X_MATCH, true, false));
         declarable.add(new DirectExchange(DEAD_LETTER_EXCHANGE, true, false));
-        //////////////////////////////////////////////////////////////////////////////////////////////////////
+        //********************************************* Add Dead Letter ***************************************//
         declarable.add(new Queue(DEAD_LETTER_QUEUE, true));
         Map<String, Object> arguments = new HashMap<>();
         arguments.put("x-dead-letter-exchange", DEAD_LETTER_EXCHANGE);
         arguments.put("x-dead-letter-routing-key", DEAD_LETTER_ROUTING_KEY);
         declarable.add(new Queue(QUEUE_5, true, false, false, arguments));
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////
+        //********************************************* Add Binding ***************************************//
         declarable.addAll(deadLetterBinding());
         declarable.addAll(directBinding());
         declarable.addAll(topicBinding());

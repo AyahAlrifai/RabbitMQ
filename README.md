@@ -17,6 +17,10 @@ spring.rabbitmq.username=username
 spring.rabbitmq.password=password
 ```
 
+### Swagger URL
+
+[http://localhost:8088/rabbitmq/swagger-ui/index.html#/](http://localhost:8088/rabbitmq/swagger-ui/index.html#/)
+
 ### RabbitMq After Run Application
 
 ![direct](./img/direct.png)
@@ -33,7 +37,7 @@ spring.rabbitmq.password=password
 
 #### Example 1
 ```bash
-curl --location 'http://localhost:8088/direct-exchange?message=hello%20world1&routingKey=log1'
+curl --location 'http://localhost:8088/rabbitmq/direct-exchange?message=hello%20world1&routingKey=log1'
 ```
 
 ```text
@@ -43,7 +47,7 @@ q1 ------------> Received Message: hello world1
 
 #### Example 2
 ```bash
-curl --location 'http://localhost:8088/direct-exchange?message=hello%20world2&routingKey=log2'
+curl --location 'http://localhost:8088/rabbitmq/direct-exchange?message=hello%20world2&routingKey=log2'
 ```
 
 ```text
@@ -53,7 +57,7 @@ q2 ------------> Received Message: hello world2
 
 #### Example 3
 ```bash
-curl --location 'http://localhost:8088/direct-exchange?message=hello%20world3&routingKey=log3'
+curl --location 'http://localhost:8088/rabbitmq/direct-exchange?message=hello%20world3&routingKey=log3'
 ```
 
 ```text
@@ -63,7 +67,7 @@ q3 ------------> Received Message: hello world3
 
 #### Example 4
 ```bash
-curl --location 'http://localhost:8088/direct-exchange?message=hello%20world4&routingKey=log4'
+curl --location 'http://localhost:8088/rabbitmq/direct-exchange?message=hello%20world4&routingKey=log4'
 ```
 
 ```text
@@ -73,7 +77,7 @@ q4 ------------> Received Message: hello world4
 
 #### Example 5
 ```bash
-curl --location 'http://localhost:8088/direct-exchange?message=hello%20world5&routingKey=log5'
+curl --location 'http://localhost:8088/rabbitmq/direct-exchange?message=hello%20world5&routingKey=log5'
 ```
 
 ```text
@@ -84,7 +88,7 @@ Message: hello world5 RoutingKey: log5
 
 #### Example 1
 ```bash
-curl --location 'http://localhost:8088/topic-exchange?message=hello%20world&routingKey=ayah.log1.log'
+curl --location 'http://localhost:8088/rabbitmq/topic-exchange?message=hello%20world&routingKey=ayah.log1.log'
 ```
 
 ```text
@@ -95,7 +99,7 @@ q1 ------------> Received Message: hello world
 
 #### Example 2
 ```bash
-curl --location 'http://localhost:8088/topic-exchange?message=hello%20world&routingKey=ayah.log2.log'
+curl --location 'http://localhost:8088/rabbitmq/topic-exchange?message=hello%20world&routingKey=ayah.log2.log'
 ```
 
 ```text
@@ -109,7 +113,7 @@ q3 ------------> Received Message: hello world
 
 #### Example 1
 ```bash
-curl --location 'http://localhost:8088/header-exchange?message=hello%20world&type=email'
+curl --location 'http://localhost:8088/rabbitmq/header-exchange?message=hello%20world&type=email'
 ```
 
 ```text
@@ -120,7 +124,7 @@ q2 ------------> Received Message: hello world
 #### Example 2
 
 ```bash
-curl --location 'http://localhost:8088/header-exchange?message=hello%20world&type=message'
+curl --location 'http://localhost:8088/rabbitmq/header-exchange?message=hello%20world&type=message'
 ```
 
 ```text
@@ -130,7 +134,7 @@ q1 ------------> Received Message: hello world
 
 #### Example 3
 ```bash
-curl --location 'http://localhost:8088/header-exchange?message=hello%20world&type=notification'
+curl --location 'http://localhost:8088/rabbitmq/header-exchange?message=hello%20world&type=notification'
 ```
 
 ```text
@@ -140,7 +144,7 @@ q3 ------------> Received Message: hello world
 
 #### Example 4
 ```bash
-curl --location 'http://localhost:8088/header-exchange?message=hello%20world&type=sms'
+curl --location 'http://localhost:8088/rabbitmq/header-exchange?message=hello%20world&type=sms'
 ```
 
 ```text
@@ -150,7 +154,7 @@ q4 ------------> Received Message: hello world
 
 #### Example 5
 ```bash
-curl --location 'http://localhost:8088/header-exchange?message=hello%20world&type=mms'
+curl --location 'http://localhost:8088/rabbitmq/header-exchange?message=hello%20world&type=mms'
 ```
 
 ```text
@@ -161,7 +165,7 @@ Message: hello world Type: mms
 
 #### Example 1
 ```bash
-curl --location 'http://localhost:8088/header-exchange-x-match?message=hello%20world&type=message&count=0'
+curl --location 'http://localhost:8088/rabbitmq/header-exchange-x-match?message=hello%20world&type=message&count=0'
 ```
 
 ```text
@@ -173,7 +177,7 @@ q1 ------------> Received Message: hello world
 #### Example 2
 
 ```bash
-curl --location 'http://localhost:8088/header-exchange-x-match?message=hello%20world&type=sms&count=1'
+curl --location 'http://localhost:8088/rabbitmq/header-exchange-x-match?message=hello%20world&type=sms&count=1'
 ```
 
 ```text
@@ -184,7 +188,7 @@ q4 ------------> Received Message: hello world
 
 #### Example 3
 ```bash
-curl --location 'http://localhost:8088/header-exchange-x-match?message=hello%20world&type=message&count=1'
+curl --location 'http://localhost:8088/rabbitmq/header-exchange-x-match?message=hello%20world&type=message&count=1'
 ```
 
 ```text
@@ -197,7 +201,7 @@ q4 ------------> Received Message: hello world
 
 #### Example 4
 ```bash
-curl --location 'http://localhost:8088/header-exchange-x-match?message=hello%20world&type=sms&count=0'
+curl --location 'http://localhost:8088/rabbitmq/header-exchange-x-match?message=hello%20world&type=sms&count=0'
 ```
 
 ```text
@@ -208,7 +212,7 @@ Message: hello world Type: sms Count: 0
 
 #### Example 1
 ```bash
-curl --location 'http://localhost:8088/fanout-exchange?message=hello%20world'
+curl --location 'http://localhost:8088/rabbitmq/fanout-exchange?message=hello%20world'
 ```
 
 ```text
@@ -223,7 +227,7 @@ q3 ------------> Received Message: hello world
 
 #### Example 1
 ```bash
-curl --location 'http://localhost:8088/direct-exchange?message=deadLetterMessage&routingKey=log5'
+curl --location 'http://localhost:8088/rabbitmq/direct-exchange?message=deadLetterMessage&routingKey=log5'
 ```
 
 ```text

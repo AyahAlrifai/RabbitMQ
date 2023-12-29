@@ -6,32 +6,38 @@ import org.springframework.amqp.core.MessageProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * Publisher.
+ *
+ * @author Ayah Refai
+ * @since 12/19/2023
+ */
 @Component
 public class Publisher {
 
     private final AmqpTemplate rabbitTemplate;
 
     @Autowired
-    public Publisher(AmqpTemplate rabbitTemplate) {
+    public Publisher(final AmqpTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;
     }
 
-    public void sendDirectMessage(String message, String routingKey) {
+    public void sendDirectMessage(final String message, final String routingKey) {
         rabbitTemplate.convertAndSend(RabbitMQConfig.DIRECT_EXCHANGE, routingKey, message);
         System.out.println("Message: " + message + " RoutingKey: " + routingKey);
     }
 
-    public void sendTopicMessage(String message, String routingKey) {
+    public void sendTopicMessage(final String message, final String routingKey) {
         rabbitTemplate.convertAndSend(RabbitMQConfig.TOPIC_EXCHANGE, routingKey, message);
         System.out.println("Message: " + message + " RoutingKey: " + routingKey);
     }
 
-    public void sendFanoutMessage(String message) {
+    public void sendFanoutMessage(final String message) {
         rabbitTemplate.convertAndSend(RabbitMQConfig.FANOUT_EXCHANGE, null, message);
         System.out.println("Message: " + message);
     }
 
-    public void sendHeaderMessage(String message, String type) {
+    public void sendHeaderMessage(final String message, final String type) {
         MessageProperties properties = new MessageProperties();
         properties.setHeader("type", type);
 
@@ -42,7 +48,7 @@ public class Publisher {
         System.out.println("Message: " + message + " Type: " + type);
     }
 
-    public void sendHeaderXMatchMessage(String message, String type, String count) {
+    public void sendHeaderXMatchMessage(final String message, final String type, final String count) {
         MessageProperties properties = new MessageProperties();
         if (type != null && !type.isBlank()) {
             properties.setHeader("type", type);

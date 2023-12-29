@@ -6,6 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * RabbitMQController.
+ *
+ * @author Ayah Refai
+ * @since 12/19/2023
+ */
 @RestController
 public class RabbitMQController {
 
@@ -17,32 +23,32 @@ public class RabbitMQController {
     }
 
     @GetMapping("/direct-exchange")
-    public void directExchange(@PathParam("message") String message,
-                               @PathParam("routingKey") String routingKey) {
+    public void directExchange(@PathParam("message") final String message,
+                               @PathParam("routingKey") final String routingKey) {
         this.publisher.sendDirectMessage(message, routingKey);
     }
 
     @GetMapping("/topic-exchange")
-    public void topicExchange(@PathParam("message") String message,
-                              @PathParam("routingKey") String routingKey) {
+    public void topicExchange(@PathParam("message") final String message,
+                              @PathParam("routingKey") final String routingKey) {
         this.publisher.sendTopicMessage(message, routingKey);
     }
 
     @GetMapping("/fanout-exchange")
-    public void fanoutExchange(@PathParam("message") String message) {
+    public void fanoutExchange(@PathParam("message") final String message) {
         this.publisher.sendFanoutMessage(message);
     }
 
     @GetMapping("/header-exchange")
-    public void headerExchange(@PathParam("message") String message,
-                               @PathParam("type") String type) {
+    public void headerExchange(@PathParam("message") final String message,
+                               @PathParam("type") final String type) {
         this.publisher.sendHeaderMessage(message, type);
     }
 
     @GetMapping("/header-exchange-x-match")
-    public void headerXMatchExchange(@PathParam("message") String message,
-                                     @PathParam("type") String type,
-                                     @PathParam("count") String count) {
+    public void headerXMatchExchange(@PathParam("message") final String message,
+                                     @PathParam("type") final String type,
+                                     @PathParam("count") final String count) {
         this.publisher.sendHeaderXMatchMessage(message, type, count);
     }
 }
