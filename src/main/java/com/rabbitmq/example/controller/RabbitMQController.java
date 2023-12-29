@@ -19,13 +19,13 @@ public class RabbitMQController {
     @GetMapping("/direct-exchange")
     public void directExchange(@PathParam("message") String message,
                                @PathParam("routingKey") String routingKey) {
-        this.publisher.sendDirectMessage(message,routingKey);
+        this.publisher.sendDirectMessage(message, routingKey);
     }
 
     @GetMapping("/topic-exchange")
     public void topicExchange(@PathParam("message") String message,
-                               @PathParam("routingKey") String routingKey) {
-        this.publisher.sendTopicMessage(message,routingKey);
+                              @PathParam("routingKey") String routingKey) {
+        this.publisher.sendTopicMessage(message, routingKey);
     }
 
     @GetMapping("/fanout-exchange")
@@ -35,7 +35,14 @@ public class RabbitMQController {
 
     @GetMapping("/header-exchange")
     public void headerExchange(@PathParam("message") String message,
-                              @PathParam("type") String type) {
-        this.publisher.sendHeaderMessage(message,type);
+                               @PathParam("type") String type) {
+        this.publisher.sendHeaderMessage(message, type);
+    }
+
+    @GetMapping("/header-exchange-x-match")
+    public void headerXMatchExchange(@PathParam("message") String message,
+                                     @PathParam("type") String type,
+                                     @PathParam("count") String count) {
+        this.publisher.sendHeaderXMatchMessage(message, type, count);
     }
 }
