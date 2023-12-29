@@ -157,7 +157,7 @@ curl --location 'http://localhost:8088/header-exchange?message=hello%20world&typ
 Message: hello world Type: mms
 ```
 
-### Headers Exchange WITH X-MATCH Example
+### Headers Exchange With x-match Example
 
 #### Example 1
 ```bash
