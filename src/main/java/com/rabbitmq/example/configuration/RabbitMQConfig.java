@@ -66,7 +66,6 @@ public class RabbitMQConfig {
                 DIRECT_EXCHANGE,
                 "log4",
                 null));
-        ////////////////////////////////////////////////////////////////////////////
         bindings.add(new Binding(QUEUE_5,
                 Binding.DestinationType.QUEUE,
                 DIRECT_EXCHANGE,
