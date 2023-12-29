@@ -47,7 +47,7 @@ public class Publisher {
         if (type != null && !type.isBlank()) {
             properties.setHeader("type", type);
         }
-        if (count != null) {
+        if (count != null &&!count.isBlank()) {
             properties.setHeader("count", count);
         }
 
