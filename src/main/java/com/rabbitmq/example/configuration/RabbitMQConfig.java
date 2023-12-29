@@ -269,7 +269,7 @@ public class RabbitMQConfig {
         Map<String, Object> arguments = new HashMap<>();
         arguments.put("x-dead-letter-exchange", DEAD_LETTER_EXCHANGE);
         arguments.put("x-dead-letter-routing-key", DEAD_LETTER_ROUTING_KEY);
-        declarable.add(new Queue(QUEUE_5, true,false,false,arguments));
+        declarable.add(new Queue(QUEUE_5, true, false, false, arguments));
         ///////////////////////////////////////////////////////////////////////////////////////////////////////
         declarable.addAll(deadLetterBinding());
         declarable.addAll(directBinding());
