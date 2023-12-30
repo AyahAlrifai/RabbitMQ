@@ -1,3 +1,5 @@
+[About Ayah Alrefai](https://github.com/AyahAlrifai/AyahAlrifai/blob/main/README.md)
+
 # Getting Started
 
 ### RabbitMQ Docker Image
@@ -77,11 +79,11 @@ q4 ------------> Received Message: hello world4
 
 #### Example 5
 ```bash
-curl --location 'http://localhost:8088/rabbitmq/direct-exchange?message=hello%20world5&routingKey=log5'
+curl --location 'http://localhost:8088/rabbitmq/direct-exchange?message=hello%20world5&routingKey=log0'
 ```
 
 ```text
-Message: hello world5 RoutingKey: log5
+Message: hello world5 RoutingKey: log0
 ```
 
 ### Topic Exchange Examples
@@ -223,7 +225,7 @@ q2 ------------> Received Message: hello world
 q3 ------------> Received Message: hello world
 ```
 
-### DEAD LETTER Exchange Example
+### Dead Letter Exchange Example
 
 #### Example 1
 ```bash
